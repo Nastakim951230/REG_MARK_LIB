@@ -119,47 +119,45 @@ namespace REG_MARK_LIB
         {
             try
             {
-                string kodRegiona = prevMark.Substring( prevMark.Length - 3);
-                string kodRegionaStart = rangeStart.Substring( rangeStart.Length - 3);
-                string kodRegionaEnd = rangeEnd.Substring( rangeEnd.Length - 3);
-                if (kodRegiona != kodRegionaEnd || kodRegiona != kodRegionaStart)
+                string kodRegion = prevMark.Substring(prevMark.Length - 3);
+                string kodRegionStart = rangeStart.Substring(rangeStart.Length - 3);
+                string kodRegionEnd = rangeEnd.Substring(rangeEnd.Length - 3);
+                if (kodRegionStart != kodRegionEnd || kodRegionStart != kodRegion)
                 {
                     return "out of stock";
                 }
+                bool a = false; // Входит ли данное число в диапозон
                 string mark = rangeStart;
-                
-                bool diapozon = false;
                 while (mark != rangeEnd)
                 {
                     if (mark == prevMark)
                     {
-                        diapozon = true;
+                        a = true;
                         break;
                     }
                     mark = GetNextMarkAfter(mark);
                 }
                 if (mark == prevMark)
                 {
-                    diapozon = true;
+                    a = true;
                 }
-                string markaNext = prevMark;
-                if (diapozon == true)
+                string nextMark = prevMark;
+                if (a == true)
                 {
-                    if (markaNext != rangeEnd)
+                    if (nextMark != rangeEnd)
                     {
-                        markaNext = GetNextMarkAfter(markaNext);
+                        nextMark = GetNextMarkAfter(nextMark);
                     }
                     else
                     {
                         return "out of stock";
-                        
                     }
                 }
                 else
                 {
                     return "out of stock";
                 }
-                return markaNext;
+                return nextMark;
             }
             catch
             {
@@ -170,18 +168,18 @@ namespace REG_MARK_LIB
         {
             try
             {
-                string kodRegiona1 = mark1.Substring(mark1.Length - 3);
-                string kodRegiona2 = mark2.Substring(mark2.Length - 3);
-                if (kodRegiona1 != kodRegiona2)
+                string kodRegion1 = mark1.Substring(mark1.Length - 3);
+                string kodRegion2 = mark1.Substring(mark1.Length - 3);
+                if (kodRegion1 != kodRegion2)
                 {
                     return 0;
                 }
-
-                int count = 1;
-                string markNext = mark1;
-                while (markNext != mark2)
+                int count = 0;
+                string nextMark = mark1;
+                count++;
+                while (nextMark != mark2)
                 {
-                    markNext = GetNextMarkAfter(markNext);
+                    nextMark = GetNextMarkAfter(nextMark);
                     count++;
                 }
                 return count;
