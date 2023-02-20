@@ -72,6 +72,7 @@ namespace REG_MARK_LIB
                             if (mark[4] == simvol[simvol.Count - 1])
                             {
                                 stringMark = "error";
+
                             }
                             else
                             {
